@@ -3,7 +3,7 @@ pipeline {
     stages{
         stage ("clone") {
             steps {
-                git branch: 'main', url: 'https://github.com/ArunMagi/sample-java-spring-app.git'
+                git branch: 'main', url: 'https://github.com/Vignesh1702/sample-java-spring-app.git'
             }
         }
         stage ("build") {
@@ -13,20 +13,20 @@ pipeline {
         }
         stage ("docker image"){
             steps {
-                sh "docker build -t arunmagi/java ."
+                sh "docker build -t java-image ."
                 sh "docker images"
             }
         }
         stage("docker hub") {
             steps {
-                sh "docker login -u arunmagi -p Arun@ak@99"
-                sh "docker push arunmagi/java"
+                sh "docker login -u gvignesh17 -p Vignesh!17021"
+                sh "docker push gvignesh17/java-image"
             }
         }
         stage ("docker conatainer"){
             steps {
-                sh "docker rm -f java"
-                sh "docker run -d --name java -p 8087:8080 arunmagi/java"
+                sh "docker rm -f java-image"
+                sh "docker run -d --name java-app -p 8087:8080 gvignesh17/java-image"
             }
         }
     }
